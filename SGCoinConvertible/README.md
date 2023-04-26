@@ -163,6 +163,7 @@ Dans ce code, la variable `_approvedNonces` est un mapping qui stocke le dernier
 
 En utilisant cette approche, un attaquant ne peut pas simplement remplacer une approbation existante en soumettant une transaction avec un gas price plus élevé. Il doit connaître le nonce précédent pour soumettre une transaction valide, ce qui rend l'attaque beaucoup plus difficile.
 
+	la transaction n'a pas besoin d'avoir le même expéditeur (sender) et destinataire (receiver) pour qu'une vulnérabilité de front-running puisse se produire. La vulnérabilité est liée au contenu de la transaction et à sa séquence dans le pool de transactions en attente. Si une transaction est publiée avec des paramètres identiques à une transaction en attente, mais avec des frais de gaz plus élevés, elle sera traitée en premier par les mineurs et remplacera la transaction initiale, même si les expéditeurs et les destinataires sont différents. C'est pourquoi il est important de concevoir des contrats intelligents en tenant compte de cette vulnérabilité et d'adopter des mécanismes de protection appropriés, tels que l'utilisation de nonces ou la définition de délais de blocage pour les transactions.
 
 ## Possible denial-of-service dans transferFrom() 
 
